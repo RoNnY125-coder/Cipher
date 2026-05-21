@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import { useNavigate } from 'react-router-dom'
 
 const genres = ['All Genres', 'Hip-Hop', 'Rap', 'R&B', 'Trap', 'Drill', 'Jazz', 'Afrobeats', 'Pop', 'Rock', 'Electronic']
 
@@ -12,6 +13,8 @@ const mockSongs = [
 ]
 
 function Home() {
+  const navigate = useNavigate()
+
   return (
     <div className='min-h-screen' style={{ background: '#131316' }}>
       <Navbar />
@@ -88,6 +91,7 @@ function Home() {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {mockSongs.map((song) => (
             <div key={song.id}
+              onClick={() => navigate(`/song/${song.id}`)}
               className='rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02]'
               style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
 
