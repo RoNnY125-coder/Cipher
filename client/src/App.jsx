@@ -6,6 +6,7 @@ import SongDetail from './pages/SongDetail'
 import ProtectedRoute from './components/ProtectedRoute'
 import Search from './pages/Search'
 import Profile from './pages/Profile'
+import Community from './pages/Community'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/song/:id' element={<ProtectedRoute><SongDetail /></ProtectedRoute>} />
         <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path='/community' element={<ProtectedRoute><Community /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
