@@ -5,6 +5,7 @@ import Signup from './pages/Signup'
 import SongDetail from './pages/SongDetail'
 import ProtectedRoute from './components/ProtectedRoute'
 import Search from './pages/Search'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='/song/:id' element={<ProtectedRoute><SongDetail /></ProtectedRoute>} />
         <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
+        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
