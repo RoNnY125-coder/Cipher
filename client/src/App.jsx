@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Search from './pages/Search'
 import Profile from './pages/Profile'
 import Community from './pages/Community'
+import Subscription from './pages/Subscription'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/search' element={<ProtectedRoute><Search /></ProtectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/community' element={<ProtectedRoute><Community /></ProtectedRoute>} />
+        <Route path='/subscription' element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
