@@ -24,19 +24,35 @@ function Profile() {
   const [bio, setBio] = useState('Music is my religion. Hip-hop is my prayer.')
   const [activeTab, setActiveTab] = useState('songs')
 
+  const handleSpotifyConnect = async () => {
+    try {
+      const stored = localStorage.getItem('cipherUser')
+      const userData = JSON.parse(stored)
+
+      const res = await fetch('http://localhost:5000/api/spotify-auth/login', {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+
+      const data = await res.json()
+      window.location.href = data.url
+    } catch (err) {
+      console.error('Spotify connect failed', err)
+    }
+  }
+
   return (
     <div className='min-h-screen' style={{ background: '#131316' }}>
       <Navbar />
 
       {/* Hero Screen Background */}
       <div className='relative pt-16 overflow-hidden' style={{ minHeight: '40vh' }}>
-        {/* Animated background — low opacity hero */}
         <div className='absolute inset-0 cursor-pointer'
           onClick={() => setHeroFullscreen(true)}
           style={{
             background: 'linear-gradient(135deg, rgba(0,255,133,0.06) 0%, rgba(0,0,0,0) 50%, rgba(0,255,133,0.04) 100%)',
           }}>
-          {/* Abstract circles mimicking hero screen */}
           <div className='absolute' style={{
             width: '600px', height: '600px', borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(0,255,133,0.08) 0%, transparent 70%)',
@@ -53,12 +69,10 @@ function Profile() {
           </div>
         </div>
 
-        {/* Profile Info */}
         <div className='relative px-8 py-16 mt-4 max-w-7xl mx-auto'>
           <div className='flex items-start gap-8'>
 
-            {/* Avatar */}
-            <div className='relative cursor-pointer group flex-shrink-0'>
+            <div className='relative cursor-pointer group flex-shrink-0 w-24'>
               <div className='w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold transition-all duration-300 group-hover:scale-105'
                 style={{
                   background: 'linear-gradient(135deg, rgba(0,255,133,0.3), rgba(0,255,133,0.1))',
@@ -74,7 +88,6 @@ function Profile() {
               </div>
             </div>
 
-            {/* User Info */}
             <div className='flex-1'>
               <div className='flex items-center gap-4 mb-2'>
                 {editing ? (
@@ -91,7 +104,6 @@ function Profile() {
                   </h1>
                 )}
 
-                {/* Plan badge */}
                 <span className='px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider'
                   style={{
                     background: user?.plan === 'paid' ? 'rgba(0,255,133,0.15)' : 'rgba(255,255,255,0.08)',
@@ -102,7 +114,6 @@ function Profile() {
                   {user?.plan === 'paid' ? '⭐ Pro' : 'Free'}
                 </span>
 
-                {/* Edit button */}
                 <button
                   onClick={() => setEditing(!editing)}
                   className='px-4 py-1 rounded-full text-xs font-semibold transition-all duration-200 hover:scale-105'
@@ -116,7 +127,6 @@ function Profile() {
                 </button>
               </div>
 
-              {/* Bio */}
               {editing ? (
                 <input
                   value={bio}
@@ -134,7 +144,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className='px-8 max-w-7xl mx-auto pb-16'>
 
         {/* Favourite Artists */}
@@ -260,8 +269,29 @@ function Profile() {
           </div>
         )}
 
+        {/* Spotify Connect */}
+        <div className='mt-10 p-6 rounded-2xl mb-6'
+          style={{ background: 'rgba(29,185,84,0.05)', border: '1px solid rgba(29,185,84,0.2)' }}>
+          <div className='flex items-center justify-between'>
+            <div>
+              <p className='text-white font-semibold mb-1' style={{ fontFamily: 'Syne' }}>
+                Spotify Connection
+              </p>
+              <p className='text-sm' style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'Hanken Grotesk' }}>
+                Connect your Spotify account to unlock personalized features
+              </p>
+            </div>
+            <button
+              onClick={handleSpotifyConnect}
+              className='px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105 flex-shrink-0 flex items-center gap-2'
+              style={{ background: '#1DB954', color: '#fff', fontFamily: 'Hanken Grotesk' }}>
+              ♫ Connect Spotify
+            </button>
+          </div>
+        </div>
+
         {/* Subscription Card */}
-        <div className='mt-10 p-6 rounded-2xl'
+        <div className='p-6 rounded-2xl'
           style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div className='flex items-center justify-between'>
             <div>

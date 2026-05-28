@@ -8,6 +8,7 @@ import Search from './pages/Search'
 import Profile from './pages/Profile'
 import Community from './pages/Community'
 import Subscription from './pages/Subscription'
+import SpotifyCallback from './pages/SpotifyCallback'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/community' element={<ProtectedRoute><Community /></ProtectedRoute>} />
         <Route path='/subscription' element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
+        <Route path='/callback' element={<SpotifyCallback />} />
       </Routes>
     </BrowserRouter>
   )
